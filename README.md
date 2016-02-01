@@ -1,0 +1,1 @@
+A Grunt boilerplate with some sensible defaults for any new project.
