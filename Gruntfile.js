@@ -51,6 +51,14 @@ module.exports = function(grunt) {
 
         /* JS */
 
+        jshint: {
+            files: ['Gruntfile.js', 'js/*.js'],
+            options: {
+                globals: {
+                    jQuery: true
+            }
+        },
+
         concat: {
           dist: {
             src: ['js/*.js'],
@@ -89,6 +97,11 @@ module.exports = function(grunt) {
                 tasks: ['cssmin'],
             },
 
+            jshint: {
+                files: ['js/*.js'],
+                tasks: ['jshint'],
+            },
+
             concat: {
                 files: ['js/*.js'],
                 tasks: ['concat'],
@@ -123,12 +136,13 @@ grunt.loadNpmTasks('grunt-sass');
 grunt.loadNpmTasks('grunt-postcss');
 grunt.loadNpmTasks('grunt-concat-css');
 grunt.loadNpmTasks('grunt-contrib-cssmin');
+grunt.loadNpmTasks('grunt-contrib-jshint');
 grunt.loadNpmTasks('grunt-contrib-concat');
 grunt.loadNpmTasks('grunt-contrib-uglify');
 grunt.loadNpmTasks('grunt-contrib-watch');
 grunt.loadNpmTasks('grunt-express');
 
-grunt.registerTask('default', ['sass', 'concat_css', 'cssmin', 'postcss', 'concat', 'uglify']);
+grunt.registerTask('default', ['sass', 'concat_css', 'cssmin', 'postcss', 'jshint', 'concat', 'uglify']);
 grunt.registerTask('server', ['express', 'watch']);
 
 };
