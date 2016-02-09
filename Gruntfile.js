@@ -16,22 +16,6 @@ module.exports = function(grunt) {
             }
         },
 
-        postcss: {
-            options: {
-                map: {
-                  inline: false, // save all sourcemaps as separate files...
-                  annotation: 'css/main.postcss.map' // ...to the specified directory
-                },
-
-                processors: [
-                    require('autoprefixer')({browsers: 'last 2 versions'}), // add vendor prefixes
-                ]
-            },
-            dist: {
-                src: 'css/*.css'
-            }
-        },
-
         concat_css: {
             options: {},
             all: {
@@ -47,6 +31,22 @@ module.exports = function(grunt) {
             }
           }
 
+        },
+
+        postcss: {
+            options: {
+                map: {
+                  inline: false, // save all sourcemaps as separate files...
+                  annotation: 'css/main.postcss.map' // ...to the specified directory
+                },
+
+                processors: [
+                    require('autoprefixer')({browsers: 'last 2 versions'}), // add vendor prefixes
+                ]
+            },
+            dist: {
+                src: 'css/*.css'
+            }
         },
 
         /* JS */
@@ -82,11 +82,6 @@ module.exports = function(grunt) {
                 tasks: ['sass'],
             },
 
-            postcss: {
-                files: ['css/*.css'],
-                tasks: ['postcss'],
-            },
-
             concat_css: {
                 files: ['css/*.css'],
                 tasks: ['concat-css'],
@@ -95,6 +90,11 @@ module.exports = function(grunt) {
             cssmin: {
                 files: ['css/main.css'],
                 tasks: ['cssmin'],
+            },
+
+            postcss: {
+                files: ['css/*.css'],
+                tasks: ['postcss'],
             },
 
             jshint: {
