@@ -76,6 +76,29 @@ module.exports = function(grunt) {
 
         /* OTHER STUFF */
 
+        svg_sprite: {
+            options: {
+                // Task-specific options go here. 
+            },
+            target: {
+                expand: true,
+                cwd: 'img/svg',
+                src: ['**/*.svg'],
+                dest: 'img',
+                options: {
+                    mode: {
+                        css: {
+                            render: {
+                                scss: true
+                            }
+                        },
+                        symbol: true
+                    }
+                }
+            },
+        },
+
+
         watch: {
             sass: {
                 files: ['sass/*.scss'],
@@ -112,8 +135,13 @@ module.exports = function(grunt) {
                 tasks: ['uglify'],
             },
 
-            src: {
-                files: ['*.html', '*.css'],
+            svg_sprite: {
+                files: ['img/svg/*.svg'],
+                tasks: ['svg_sprite'],
+            }
+
+            livereload: {
+                files: ['*.html', '*.css', '*.js'],
                 options: {
                     livereload: true
                 }
@@ -126,11 +154,11 @@ module.exports = function(grunt) {
                     port:3000,
                     hostname:'localhost',
                     bases:['.'],
-                    livereload:true 
+                    livereload: true 
                 }
             }
-        }
     });
+        }
 
 grunt.loadNpmTasks('grunt-sass');
 grunt.loadNpmTasks('grunt-postcss');
@@ -141,6 +169,7 @@ grunt.loadNpmTasks('grunt-contrib-concat');
 grunt.loadNpmTasks('grunt-contrib-uglify');
 grunt.loadNpmTasks('grunt-contrib-watch');
 grunt.loadNpmTasks('grunt-express');
+grunt.loadNpmTasks('grunt-svg-sprite');
 
 grunt.registerTask('default', ['sass', 'concat_css', 'cssmin', 'postcss', 'jshint', 'concat', 'uglify']);
 grunt.registerTask('server', ['express', 'watch']);

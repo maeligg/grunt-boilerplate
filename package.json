@@ -12,6 +12,7 @@
     "grunt-contrib-watch": "^0.6.1",
     "grunt-express": "^1.4.1",
     "grunt-postcss": "~0.6.0",
-    "grunt-sass": "^1.1.0"
+    "grunt-sass": "^1.1.0",
+    "grunt-svg-sprite": "^1.2.19"
   }
 }
