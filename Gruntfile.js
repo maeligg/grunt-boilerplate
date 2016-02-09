@@ -16,23 +16,6 @@ module.exports = function(grunt) {
             }
         },
 
-        concat_css: {
-            options: {},
-            all: {
-              src: ["/css/*.css"],
-              dest: "css/main.css"
-            },
-        },
-
-        cssmin: {
-          target: {
-            files: {
-              'css/main.min.css': ['css/main.css']
-            }
-          }
-
-        },
-
         postcss: {
             options: {
                 map: {
@@ -45,8 +28,17 @@ module.exports = function(grunt) {
                 ]
             },
             dist: {
-                src: 'css/*.css'
+                src: 'css/main.css'
             }
+        },
+
+        cssmin: {
+          target: {
+            files: [{
+              src: 'css/main.css',
+              dest: 'css/main.min.css'
+            }]
+          }
         },
 
         /* JS */
@@ -56,6 +48,7 @@ module.exports = function(grunt) {
             options: {
                 globals: {
                     jQuery: true
+                }
             }
         },
 
@@ -91,11 +84,10 @@ module.exports = function(grunt) {
                             render: {
                                 scss: true
                             }
-                        },
-                        symbol: true
+                        }
                     }
                 }
-            },
+            }
         },
 
 
@@ -105,19 +97,14 @@ module.exports = function(grunt) {
                 tasks: ['sass'],
             },
 
-            concat_css: {
-                files: ['css/*.css'],
-                tasks: ['concat-css'],
+            postcss: {
+                files: ['css/main.css'],
+                tasks: ['postcss'],
             },
 
             cssmin: {
                 files: ['css/main.css'],
                 tasks: ['cssmin'],
-            },
-
-            postcss: {
-                files: ['css/*.css'],
-                tasks: ['postcss'],
             },
 
             jshint: {
@@ -138,17 +125,17 @@ module.exports = function(grunt) {
             svg_sprite: {
                 files: ['img/svg/*.svg'],
                 tasks: ['svg_sprite'],
-            }
+            },
 
             livereload: {
                 files: ['*.html', '*.css', '*.js'],
                 options: {
                     livereload: true
                 }
-            },
+            }
         },
 
-        express:{
+/*        express:{
             all:{
                 options:{
                     port:3000,
@@ -157,21 +144,20 @@ module.exports = function(grunt) {
                     livereload: true 
                 }
             }
+        }*/
     });
-        }
 
 grunt.loadNpmTasks('grunt-sass');
 grunt.loadNpmTasks('grunt-postcss');
-grunt.loadNpmTasks('grunt-concat-css');
 grunt.loadNpmTasks('grunt-contrib-cssmin');
 grunt.loadNpmTasks('grunt-contrib-jshint');
 grunt.loadNpmTasks('grunt-contrib-concat');
 grunt.loadNpmTasks('grunt-contrib-uglify');
 grunt.loadNpmTasks('grunt-contrib-watch');
-grunt.loadNpmTasks('grunt-express');
+/*grunt.loadNpmTasks('grunt-express');*/
 grunt.loadNpmTasks('grunt-svg-sprite');
 
-grunt.registerTask('default', ['sass', 'concat_css', 'cssmin', 'postcss', 'jshint', 'concat', 'uglify']);
-grunt.registerTask('server', ['express', 'watch']);
+grunt.registerTask('default', ['sass', 'postcss', 'cssmin', 'jshint', 'concat', 'uglify', 'svg_sprite']);
+grunt.registerTask('server', [/*'express', */'watch']);
 
 };

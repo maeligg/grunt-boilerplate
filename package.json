@@ -4,7 +4,6 @@
   "devDependencies": {
     "autoprefixer": "^6.3.1",
     "grunt": "~0.4.1",
-    "grunt-concat-css": "^0.3.1",
     "grunt-contrib-concat": "^0.5.1",
     "grunt-contrib-cssmin": "^0.14.0",
     "grunt-contrib-jshint": "^0.12.0",
